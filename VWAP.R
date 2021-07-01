@@ -8,7 +8,7 @@ source('functions.R')
 
 tickerSymbol <- 'VZIO'
 
-DT <- GetStockData(symbol = tickerSymbol)
+DT <- GetStockData(symbol = tickerSymbol, num_days = 5)
 moltenDT <- melt.data.table(DT, id.vars = c('Date'))
 
 ggplot(moltenDT[variable %in% c('CLOSE','OPEN', 'vwap')],

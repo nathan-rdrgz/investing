@@ -1,6 +1,7 @@
 GetStockData <- function(symbol=  "AG", 
                          datee1 = '2021-01-01', 
-                         datee2 = Sys.Date()
+                         datee2 = Sys.Date(),
+                         num_days = 15
 ){
   baseURL <- "https://query1.finance.yahoo.com/v7/finance/download/"
   period1 <- "?period1="
@@ -13,6 +14,6 @@ GetStockData <- function(symbol=  "AG",
   ind <- fread(url)
   
   setnames(ind,new = c('Date','OPEN','HIGH','LOW','CLOSE','Adj.Close','VOLUME'))
-  ind[, vwap := VWAP(price = CLOSE, volume = VOLUME, n = 15)]
+  ind[, vwap := VWAP(price = CLOSE, volume = VOLUME, n = num_days)]
   return(ind)
 }
